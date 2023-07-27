@@ -38,7 +38,23 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let i = 0;
+    let result = '';
+    let str = expr;
+    while (i < str.length) {
+        if (str[i] + str[i + 1] + str[i + 2] + str[i + 3] + str[i + 4] + str[i + 5] + str[i + 6] + str[i + 7] + str[i + 8] + str[i + 9] === '**********') {
+            result = result + '   ';
+        }
+        if (i % 2 === 0 && str[i] + str[i + 1] === '10') {
+            result = result + '.';
+        } else if (i % 2 === 0 && str[i] + str[i + 1] === '11') {
+            result = result + '-';
+        } else if (i % 10 === 9 && str[i + 1] !== '*') {
+            result = result + ' ';
+        }
+        i = i + 1;
+    }
+    return result.split('    ').map(word => word.split(' ').map(character => MORSE_TABLE[character]).join('')).join(' ').trim();
 }
 
 module.exports = {
